@@ -16,12 +16,19 @@
     "@babel/preset-env": "^7.26.7",
     "babel-loader": "^9.2.1",
     "eslint": "^9.19.0",
+    "ts-loader": "^9.5.2",
+    "typescript": "^5.7.3",
     "webpack": "^5.97.1",
     "webpack-cli": "^6.0.1",
     "webpack-merge": "^6.0.1"
   },
   "dependencies": {
+    "@marcokreeft/ha-editor-formbuilder": "^2024.9.1",
+    "@mdi/js": "^7.4.47",
+    "custom-card-helpers": "^1.9.0",
     "lit": "^3.2.1",
-    "lit-element": "^4.1.1"
+    "lit-element": "^4.1.1",
+    "lit-html": "^3.2.1",
+    "sortablejs": "^1.15.6"
   }
 }

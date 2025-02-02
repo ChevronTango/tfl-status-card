@@ -32,7 +32,6 @@ customElements.define(editorName, HelloWorldCardEditor);
 
 class HelloWorldCard extends LitElement {
 
-  config;
   ctx;
 
   constructor() {
@@ -64,11 +63,9 @@ class HelloWorldCard extends LitElement {
     this._config = config;
   }
 
-
-
-  set hass(hass) {
+  render() {
     const config = this._config;
-    const hassEntities = config.entities.map(x => hass.states[x]);
+    const hassEntities = config.entities.map(x => this.hass.states[x.entity]);
     const root = this.shadowRoot;
     const content = root.getElementById("content");
 
@@ -86,26 +83,26 @@ class HelloWorldCard extends LitElement {
     else {
       this.ctx.innerHTML = '';
     }
-    this.ctx.innerHTML = hassEntities.map(entity => {
-      // console.log(entity);
-      let background = colours[entity.attributes.friendly_name]?.bg || default_colour.bg;
-      let colour = colours[entity.attributes.friendly_name]?.colour || default_colour.colour;
+    this.ctx.innerHTML = config.entities.map(entity => {
+      const hassentity = this.hass.states[entity.entity]
+      let background = colours[hassentity.attributes.friendly_name]?.bg || default_colour.bg;
+      let colour = colours[hassentity.attributes.friendly_name]?.colour || default_colour.colour;
 
       let statecolour = 'transparent';
-      if (entity.state !== 'Good Service') {
+      if (hassentity.state !== 'Good Service') {
         statecolour = 'brown';
       }
 
       return `
         <tr>
             <td style="background:${background}; color:${colour}; font-weight: bold; padding:10px;">
-              <div class="info  pointer text-content "  title="${entity.attributes.friendly_name}">
-                ${entity.attributes.friendly_name}
+              <div class="info  pointer text-content "  title="${entity.name ?? hassentity.attributes.friendly_name}">
+                ${entity.name ?? hassentity.attributes.friendly_name}
               </div>
             </td>
             <td style="background:${statecolour}; padding:10px;">
-              <div class="value  pointer text-content " title="${entity.state}">
-                ${entity.state}
+              <div class="value  pointer text-content " title="${hassentity.state}">
+                ${hassentity.state}
               </div>
             </td>
         </tr>

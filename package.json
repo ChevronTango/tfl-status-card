@@ -1,0 +1,27 @@
+{
+  "name": "ha-tfl-status-card",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "lint": "eslint  --fix ./src",
+    "start": "webpack --watch --config webpack/config.dev.js",
+    "build": "webpack --config webpack/config.prod.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.26.4",
+    "@babel/core": "^7.26.7",
+    "@babel/preset-env": "^7.26.7",
+    "babel-loader": "^9.2.1",
+    "eslint": "^9.19.0",
+    "webpack": "^5.97.1",
+    "webpack-cli": "^6.0.1",
+    "webpack-merge": "^6.0.1"
+  },
+  "dependencies": {
+    "lit": "^3.2.1",
+    "lit-element": "^4.1.1"
+  }
+}

@@ -2,14 +2,17 @@ import {
   LitElement,
   html,
   css,
-} from "lit-element";
+} from "lit";
 
 import EditorForm from '@marcokreeft/ha-editor-formbuilder';
-import { FormControlRow, FormControl, ValueChangedEvent } from '@marcokreeft/ha-editor-formbuilder/dist/interfaces';
+import { renderEntityDropdown } from '@marcokreeft/ha-editor-formbuilder/dist/utils/controls';
+import { FormControlRow, FormControl, ValueChangedEvent, FormControlType } from '@marcokreeft/ha-editor-formbuilder/dist/interfaces';
 import { TemplateResult } from 'lit-html';
-import { HomeAssistant, EntityConfig, fireEvent, HASSDomEvent } from "custom-card-helpers";
+import { HomeAssistant, EntityConfig, fireEvent, HASSDomEvent, } from "custom-card-helpers";
 
 import { customElement, property, state } from "lit/decorators.js";
+import { ScopedRegistryHost } from "@lit-labs/scoped-registry-mixin";
+import { loadHaForm } from "./load-ha-form";
 
 type EditDetailElementEvent = any; // HACK
 const configElementStyle = css`
@@ -76,7 +79,7 @@ export function processEditorEntities(
   });
 }
 
-export default class ImprovedEditorForm extends EditorForm {
+export default class ImprovedEditorForm extends ScopedRegistryHost(EditorForm) {
   @state() private _subElementEditorConfig?: any;  // HACK: SubElementEditorConfig;
 
   renderForm(formRows: FormControlRow[]): TemplateResult<1> {
@@ -234,3 +237,7 @@ export default class ImprovedEditorForm extends EditorForm {
     </div>`;
   }
 }
+
+// This is a hack to allow us to use ha-entity-picker
+// the custom component is not loaded when we start, so we need to force it to load
+(async () => await loadHaForm())();

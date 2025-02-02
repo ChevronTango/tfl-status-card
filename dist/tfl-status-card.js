@@ -15461,8 +15461,7 @@ let EntitiesCardRowEditor = class EntitiesCardRowEditor extends lit_1.LitElement
                             ${this.hass.localize(`ui.panel.lovelace.editor.card.entities.entity_row.${entityConf.type}`)}
                           </span>
                           <span class="secondary"
-                            >${this.hass.localize("ui.panel.lovelace.editor.card.entities.edit_special_row")}</span
-                          >
+                            >${this.hass.localize("ui.panel.lovelace.editor.card.entities.edit_special_row")}</span>
                         </div>
                       </div>
                     `
@@ -15483,13 +15482,21 @@ let EntitiesCardRowEditor = class EntitiesCardRowEditor extends lit_1.LitElement
                   .index=${index}
                   @click=${this._removeRow}
                 ></ha-icon-button>
-                <ha-icon-button
-                  .label=${this.hass.localize("ui.components.entity.entity-picker.edit")}
-                  .path=${js_1.mdiPencil}
-                  class="edit-icon"
-                  .index=${index}
-                  @click=${this._editRow}
-                ></ha-icon-button>
+                ${
+        // HACK
+        // Until we can preload the hui-sub-element-editor its best we don't offer editing to users
+        // They can still edit via YAML if needed
+        //     `<ha-icon-button
+        //       .label=${this.hass!.localize(
+        //   "ui.components.entity.entity-picker.edit"
+        // )}
+        //       .path=${mdiPencil}
+        //       class="edit-icon"
+        //       .index=${index}
+        //       @click=${this._editRow}
+        //     ></ha-icon-button>
+        //     `+
+        ""}
               </div>
             `)}
         </div>
@@ -15641,11 +15648,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.processEditorEntities = processEditorEntities;
-const lit_element_1 = __webpack_require__(/*! lit-element */ "./node_modules/lit-element/development/index.js");
+const lit_1 = __webpack_require__(/*! lit */ "./node_modules/lit/index.js");
 const ha_editor_formbuilder_1 = __webpack_require__(/*! @marcokreeft/ha-editor-formbuilder */ "./node_modules/@marcokreeft/ha-editor-formbuilder/dist/index.js");
 const custom_card_helpers_1 = __webpack_require__(/*! custom-card-helpers */ "./node_modules/custom-card-helpers/dist/index.m.js");
 const decorators_js_1 = __webpack_require__(/*! lit/decorators.js */ "./node_modules/lit/decorators.js");
-const configElementStyle = (0, lit_element_1.css) `
+const scoped_registry_mixin_1 = __webpack_require__(/*! @lit-labs/scoped-registry-mixin */ "./node_modules/@lit-labs/scoped-registry-mixin/development/scoped-registry-mixin.js");
+const load_ha_form_1 = __webpack_require__(/*! ./load-ha-form */ "./src/load-ha-form.js");
+const configElementStyle = (0, lit_1.css) `
   .card-config {
     /* Cancels overlapping Margins for HAForm + Card Config options */
     overflow: auto;
@@ -15705,7 +15714,7 @@ function processEditorEntities(entities) {
         return entityConf;
     });
 }
-class ImprovedEditorForm extends ha_editor_formbuilder_1.default {
+class ImprovedEditorForm extends (0, scoped_registry_mixin_1.ScopedRegistryHost)(ha_editor_formbuilder_1.default) {
     constructor() {
         super(...arguments);
         this.additionalControlRenderers = {
@@ -15714,7 +15723,7 @@ class ImprovedEditorForm extends ha_editor_formbuilder_1.default {
     }
     renderForm(formRows) {
         if (this._subElementEditorConfig) {
-            return (0, lit_element_1.html) `
+            return (0, lit_1.html) `
             <hui-sub-element-editor
               .hass=${this._hass}
               .config=${this._subElementEditorConfig}
@@ -15819,7 +15828,7 @@ class ImprovedEditorForm extends ha_editor_formbuilder_1.default {
         this._subElementEditorConfig = undefined;
     }
     static get styles() {
-        return (0, lit_element_1.css) `
+        return (0, lit_1.css) `
         ${configElementStyle}
         .edit-entity-row-header {
           display: flex;
@@ -15841,7 +15850,7 @@ class ImprovedEditorForm extends ha_editor_formbuilder_1.default {
     // Render the editor control. Should go in the utils/controls.js
     renderEntities(card, control) {
         var _a;
-        return (0, lit_element_1.html) `<div class="form-control">
+        return (0, lit_1.html) `<div class="form-control">
       <entities-card-row-editor
         label="${control.label}"
         .hass=${card._hass}
@@ -15857,6 +15866,9 @@ exports["default"] = ImprovedEditorForm;
 __decorate([
     (0, decorators_js_1.state)()
 ], ImprovedEditorForm.prototype, "_subElementEditorConfig", void 0);
+// This is a hack to allow us to use ha-entity-picker
+// the custom component is not loaded when we start, so we need to force it to load
+(async () => await (0, load_ha_form_1.loadHaForm)())();
 
 
 /***/ }),
@@ -15871,14 +15883,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ HelloWorldCardEditor)
 /* harmony export */ });
-/* harmony import */ var lit_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lit-element */ "./node_modules/lit-element/development/index.js");
+/* harmony import */ var lit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lit */ "./node_modules/lit/index.js");
 /* harmony import */ var _marcokreeft_ha_editor_formbuilder_dist_interfaces__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @marcokreeft/ha-editor-formbuilder/dist/interfaces */ "./node_modules/@marcokreeft/ha-editor-formbuilder/dist/interfaces.js");
 /* harmony import */ var _marcokreeft_ha_editor_formbuilder_dist_utils_entities__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @marcokreeft/ha-editor-formbuilder/dist/utils/entities */ "./node_modules/@marcokreeft/ha-editor-formbuilder/dist/utils/entities.js");
 /* harmony import */ var _entities_row_editor_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./entities-row-editor.ts */ "./src/entities-row-editor.ts");
 /* harmony import */ var _entities_row_editor_ts__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_entities_row_editor_ts__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _entity_row_form_ts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./entity-row-form.ts */ "./src/entity-row-form.ts");
 /* harmony import */ var _entity_row_form_ts__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_entity_row_form_ts__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _style_editor_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./style-editor.js */ "./src/style-editor.js");
 
 
 
@@ -15886,15 +15897,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
 const defaultConfig = {}
 
 class HelloWorldCardEditor extends (_entity_row_form_ts__WEBPACK_IMPORTED_MODULE_4___default()) {
-  constructor() {
-    super();
-    this.attachShadow({ mode: 'open' });
-  }
+
   static get properties() {
     return { _hass: {}, _config: {} };
   }
@@ -15906,22 +15912,23 @@ class HelloWorldCardEditor extends (_entity_row_form_ts__WEBPACK_IMPORTED_MODULE
 
   render() {
     if (!this._hass || !this._config) {
-      return (0,lit_element__WEBPACK_IMPORTED_MODULE_0__.html)``;
+      return (0,lit__WEBPACK_IMPORTED_MODULE_0__.html)``;
     }
+    // return html`     
+    // <div class="card-config">
+    // <div class="form-row">
+    // <div class="form-control">
+    // <ha-entity-picker
+    //   class="add-entity"
+    //   .hass=${this._hass}
+    // ></ha-entity-picker>
+    // </div>
+    // </div>
+    // </div>
+    //   `;
 
     return this.renderForm([
       { controls: [{ label: "Title", configValue: "title", type: _marcokreeft_ha_editor_formbuilder_dist_interfaces__WEBPACK_IMPORTED_MODULE_1__.FormControlType.Textbox }] },
-      {
-        label: "Entity",
-        controls: [{
-          configValue: "entity",
-          type: _marcokreeft_ha_editor_formbuilder_dist_interfaces__WEBPACK_IMPORTED_MODULE_1__.FormControlType.EntityDropdown,
-          items: Object.keys(this._hass.states)
-            .filter((eid) => eid.substr(0, eid.indexOf(".")) === 'sensor' &&
-              this._hass.states[eid].attributes.attribution === "Powered by TfL Open Data")
-            .map((item) => (0,_marcokreeft_ha_editor_formbuilder_dist_utils_entities__WEBPACK_IMPORTED_MODULE_2__.formatList)(item, this._hass)),
-        }]
-      },
       {
         controls: [{
           label: "Entities",
@@ -15939,58 +15946,40 @@ class HelloWorldCardEditor extends (_entity_row_form_ts__WEBPACK_IMPORTED_MODULE
 
 /***/ }),
 
-/***/ "./src/style-editor.js":
+/***/ "./src/load-ha-form.js":
 /*!*****************************!*\
-  !*** ./src/style-editor.js ***!
+  !*** ./src/load-ha-form.js ***!
   \*****************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */   loadHaForm: () => (/* binding */ loadHaForm)
 /* harmony export */ });
-/* harmony import */ var lit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lit */ "./node_modules/lit/index.js");
+const whenCreate = async (element) => {
+  await customElements.whenDefined(element);
+  return document.createElement(element);
+}
+
+// Helps us to preload ha-entity-picker which can then be used by our controls
+
+const loadHaForm = async () => {
+  if (customElements.get("ha-checkbox") && customElements.get("ha-slider") && customElements.get("ha-combo-box")) return;
 
 
-const style = (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)`
-  .entities {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    display: flex;
-  }
+  const ppr = await whenCreate('partial-panel-resolver');
+  ppr.hass = {
+    panels: [{
+      url_path: "tmp",
+      component_name: "config",
+    }]
+  };
+  ppr._updateRoutes();
+  await ppr.routerOptions.routes.tmp.load();
 
-  .entities ha-formfield {
-    display: block;
-    margin-bottom: 10px;
-    margin-left: 10px;
-  }
-
-  .checkbox-options {
-    display: flex;
-  }
-  
-  mwc-select {
-    width: 100%;
-  }
-
-  .checkbox-options ha-formfield,
-  .entities mwc-switch,
-  .entities ha-form-string {
-    padding-right: 2%;
-    width: 48%;
-  }
-
-  .checkbox-options ha-formfield {
-    margin-top: 10px;
-  }
-
-  .overall-config {
-    margin-bottom: 20px;
-  }
-`;
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (style);
-
+  const cpr = await whenCreate("ha-panel-config");
+  await cpr.routerOptions.routes.automation.load();
+}
 
 /***/ }),
 
@@ -16101,6 +16090,45 @@ const style = (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)`
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (style);
 
+
+/***/ }),
+
+/***/ "./node_modules/@lit-labs/scoped-registry-mixin/development/scoped-registry-mixin.js":
+/*!*******************************************************************************************!*\
+  !*** ./node_modules/@lit-labs/scoped-registry-mixin/development/scoped-registry-mixin.js ***!
+  \*******************************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ScopedRegistryHost: () => (/* binding */ ScopedRegistryHost)
+/* harmony export */ });
+/* harmony import */ var _lit_reactive_element_css_tag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @lit/reactive-element/css-tag.js */ "./node_modules/@lit/reactive-element/development/css-tag.js");
+/**
+ * @license
+ * Copyright 2021 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+
+function ScopedRegistryHost(superclass) {
+    return class ScopedRegistryMixin extends superclass {
+        createRenderRoot() {
+            const constructor = this.constructor;
+            const { registry, elementDefinitions, shadowRootOptions } = constructor;
+            if (elementDefinitions && !registry) {
+                constructor.registry = new CustomElementRegistry();
+                Object.entries(elementDefinitions).forEach(([tagName, klass]) => constructor.registry.define(tagName, klass));
+            }
+            const renderRoot = (this.renderOptions.creationScope = this.attachShadow({
+                ...shadowRootOptions,
+                customElements: constructor.registry,
+            }));
+            (0,_lit_reactive_element_css_tag_js__WEBPACK_IMPORTED_MODULE_0__.adoptStyles)(renderRoot, this.constructor.elementStyles);
+            return renderRoot;
+        }
+    };
+}
+//# sourceMappingURL=scoped-registry-mixin.js.map
 
 /***/ }),
 
@@ -18077,47 +18105,6 @@ if (DEV_MODE && global.reactiveElementVersions.length > 1) {
         `is not recommended.`);
 }
 //# sourceMappingURL=reactive-element.js.map
-
-/***/ }),
-
-/***/ "./node_modules/lit-element/development/index.js":
-/*!*******************************************************!*\
-  !*** ./node_modules/lit-element/development/index.js ***!
-  \*******************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   CSSResult: () => (/* reexport safe */ _lit_reactive_element__WEBPACK_IMPORTED_MODULE_0__.CSSResult),
-/* harmony export */   LitElement: () => (/* reexport safe */ _lit_element_js__WEBPACK_IMPORTED_MODULE_2__.LitElement),
-/* harmony export */   ReactiveElement: () => (/* reexport safe */ _lit_reactive_element__WEBPACK_IMPORTED_MODULE_0__.ReactiveElement),
-/* harmony export */   _$LE: () => (/* reexport safe */ _lit_element_js__WEBPACK_IMPORTED_MODULE_2__._$LE),
-/* harmony export */   _$LH: () => (/* reexport safe */ lit_html__WEBPACK_IMPORTED_MODULE_1__._$LH),
-/* harmony export */   adoptStyles: () => (/* reexport safe */ _lit_reactive_element__WEBPACK_IMPORTED_MODULE_0__.adoptStyles),
-/* harmony export */   css: () => (/* reexport safe */ _lit_reactive_element__WEBPACK_IMPORTED_MODULE_0__.css),
-/* harmony export */   defaultConverter: () => (/* reexport safe */ _lit_reactive_element__WEBPACK_IMPORTED_MODULE_0__.defaultConverter),
-/* harmony export */   getCompatibleStyle: () => (/* reexport safe */ _lit_reactive_element__WEBPACK_IMPORTED_MODULE_0__.getCompatibleStyle),
-/* harmony export */   html: () => (/* reexport safe */ lit_html__WEBPACK_IMPORTED_MODULE_1__.html),
-/* harmony export */   mathml: () => (/* reexport safe */ lit_html__WEBPACK_IMPORTED_MODULE_1__.mathml),
-/* harmony export */   noChange: () => (/* reexport safe */ lit_html__WEBPACK_IMPORTED_MODULE_1__.noChange),
-/* harmony export */   notEqual: () => (/* reexport safe */ _lit_reactive_element__WEBPACK_IMPORTED_MODULE_0__.notEqual),
-/* harmony export */   nothing: () => (/* reexport safe */ lit_html__WEBPACK_IMPORTED_MODULE_1__.nothing),
-/* harmony export */   render: () => (/* reexport safe */ lit_html__WEBPACK_IMPORTED_MODULE_1__.render),
-/* harmony export */   supportsAdoptingStyleSheets: () => (/* reexport safe */ _lit_reactive_element__WEBPACK_IMPORTED_MODULE_0__.supportsAdoptingStyleSheets),
-/* harmony export */   svg: () => (/* reexport safe */ lit_html__WEBPACK_IMPORTED_MODULE_1__.svg),
-/* harmony export */   unsafeCSS: () => (/* reexport safe */ _lit_reactive_element__WEBPACK_IMPORTED_MODULE_0__.unsafeCSS)
-/* harmony export */ });
-/* harmony import */ var _lit_reactive_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @lit/reactive-element */ "./node_modules/@lit/reactive-element/development/reactive-element.js");
-/* harmony import */ var lit_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lit-html */ "./node_modules/lit-html/development/lit-html.js");
-/* harmony import */ var _lit_element_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./lit-element.js */ "./node_modules/lit-element/development/lit-element.js");
-/**
- * @license
- * Copyright 2017 Google LLC
- * SPDX-License-Identifier: BSD-3-Clause
- */
-
-
-
 
 /***/ }),
 
@@ -20962,7 +20949,7 @@ var __webpack_exports__ = {};
   !*** ./src/index.js ***!
   \**********************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var lit_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lit-element */ "./node_modules/lit-element/development/index.js");
+/* harmony import */ var lit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lit */ "./node_modules/lit/index.js");
 /* harmony import */ var _style_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.js */ "./src/style.js");
 /* harmony import */ var _index_editor_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index-editor.js */ "./src/index-editor.js");
 
@@ -20993,7 +20980,7 @@ const cardName = 'hello-world-card';
 const editorName = cardName + '-editor';
 customElements.define(editorName, _index_editor_js__WEBPACK_IMPORTED_MODULE_2__["default"]);
 
-class HelloWorldCard extends lit_element__WEBPACK_IMPORTED_MODULE_0__.LitElement {
+class HelloWorldCard extends lit__WEBPACK_IMPORTED_MODULE_0__.LitElement {
 
   ctx;
 

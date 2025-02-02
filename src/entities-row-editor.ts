@@ -74,8 +74,7 @@ export class EntitiesCardRowEditor extends LitElement {
                           <span class="secondary"
                             >${this.hass!.localize(
               "ui.panel.lovelace.editor.card.entities.edit_special_row"
-            )}</span
-                          >
+            )}</span>
                         </div>
                       </div>
                     `
@@ -98,15 +97,21 @@ export class EntitiesCardRowEditor extends LitElement {
                   .index=${index}
                   @click=${this._removeRow}
                 ></ha-icon-button>
-                <ha-icon-button
-                  .label=${this.hass!.localize(
-              "ui.components.entity.entity-picker.edit"
-            )}
-                  .path=${mdiPencil}
-                  class="edit-icon"
-                  .index=${index}
-                  @click=${this._editRow}
-                ></ha-icon-button>
+                ${
+          // HACK
+          // Until we can preload the hui-sub-element-editor its best we don't offer editing to users
+          // They can still edit via YAML if needed
+          //     `<ha-icon-button
+          //       .label=${this.hass!.localize(
+          //   "ui.components.entity.entity-picker.edit"
+          // )}
+          //       .path=${mdiPencil}
+          //       class="edit-icon"
+          //       .index=${index}
+          //       @click=${this._editRow}
+          //     ></ha-icon-button>
+          //     `+
+          ""}
               </div>
             `
       )}

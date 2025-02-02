@@ -2,7 +2,7 @@ import {
   LitElement,
   html,
   css,
-} from "lit-element";
+} from "lit";
 
 import style from './style.js';
 

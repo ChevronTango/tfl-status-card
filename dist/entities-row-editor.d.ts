@@ -15,7 +15,7 @@ export declare class EntitiesCardRowEditor extends LitElement {
     label?: string;
     private _entityKeys;
     private _getKey;
-    render(): import("lit").TemplateResult<1> | typeof nothing;
+    render(): typeof nothing | import("lit").TemplateResult<1>;
     private _addEntity;
     private _rowMoved;
     private _removeRow;

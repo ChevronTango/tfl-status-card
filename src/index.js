@@ -7,6 +7,7 @@ import {
 import style from './style.js';
 
 import TflStatusCardEditor from './index-editor.js';
+import { fireEvent } from "custom-card-helpers";
 
 const colours = {
 
@@ -24,7 +25,6 @@ class TFlStatusCard extends LitElement {
 
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
   }
 
   static styles = style;
@@ -36,43 +36,13 @@ class TFlStatusCard extends LitElement {
     if (!config.entities) {
       throw new Error('You need to define at least one entity');
     }
-
-    const root = this.shadowRoot;
-    if (root.lastChild) root.removeChild(root.lastChild);
-
-    const card = document.createElement('ha-card');
-    const content = document.createElement('div');
-    const style = document.createElement('style');
-
-    card.id = 'ha-card';
-    content.id = 'content';
-    card.appendChild(content);
-    card.appendChild(style);
-    root.appendChild(card);
     this._config = config;
   }
 
   render() {
     const config = this._config;
-    const hassEntities = config.entities.map(x => this.hass.states[x.entity]);
-    const root = this.shadowRoot;
-    const content = root.getElementById("content");
 
-
-    // done once
-    if (!this.ctx) {
-      const table = document.createElement('div')
-      table.id = 'tfl-status';
-      content.appendChild(table);
-      this.ctx = table;
-      // user makes sense here as every login gets it's own instance
-      // this.innerHTML = ctx;
-      // this.content = this.querySelector('div');
-    }
-    else {
-      this.ctx.innerHTML = '';
-    }
-    this.ctx.innerHTML = config.entities.map(entity => {
+    const items = config.entities.map(entity => {
       const hassentity = this.hass.states[entity.entity]
       let background = colours[hassentity.attributes.friendly_name]?.bg || default_colour.bg;
       let colour = colours[hassentity.attributes.friendly_name]?.colour || default_colour.colour;
@@ -85,8 +55,8 @@ class TFlStatusCard extends LitElement {
       const className = hassentity.attributes.friendly_name.toLowerCase().replaceAll(" &", "").replaceAll(" ", "-");
       const warning = hassentity.state === "Good Service" ? "" : "warning";
 
-      return `
-        <div class="row">
+      return html`
+          <div class="row" @click=${warning ? () => this._handleClick(hassentity) : ""}>
             <div class="column line ${className}">
               <div class=""  title="${entity.name ?? hassentity.attributes.friendly_name}">
                 ${entity.name ?? hassentity.attributes.friendly_name}
@@ -97,11 +67,33 @@ class TFlStatusCard extends LitElement {
                 ${hassentity.state}
               </div>
             </div>
-        </div>
+          </div>
       `;
-    }).join('');
+    });
+
+
+    return html`<ha-card>
+      <div id="content">
+      <div id="tfl-status">
+      ${items}
+      </div>
+      </div>
+    </ha-card>`
   }
+
+  async _handleClick(entity) {
+    if (entity?.attributes?.Description) {
+      const helpers = await (window).loadCardHelpers?.();
+      const name = await helpers.showAlertDialog(this, {
+        title: entity?.attributes?.friendly_name,
+        text: entity?.attributes?.Description
+      });
+    }
+  }
+
 }
+
+
 
 customElements.define(cardName, TFlStatusCard);
 window.customCards = window.customCards || [];

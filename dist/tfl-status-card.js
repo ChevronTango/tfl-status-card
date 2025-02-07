@@ -15881,7 +15881,7 @@ __decorate([
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ HelloWorldCardEditor)
+/* harmony export */   "default": () => (/* binding */ TflStatusCardEditor)
 /* harmony export */ });
 /* harmony import */ var lit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lit */ "./node_modules/lit/index.js");
 /* harmony import */ var _marcokreeft_ha_editor_formbuilder_dist_interfaces__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @marcokreeft/ha-editor-formbuilder/dist/interfaces */ "./node_modules/@marcokreeft/ha-editor-formbuilder/dist/interfaces.js");
@@ -15899,7 +15899,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const defaultConfig = {}
 
-class HelloWorldCardEditor extends (_entity_row_form_ts__WEBPACK_IMPORTED_MODULE_4___default()) {
+class TflStatusCardEditor extends (_entity_row_form_ts__WEBPACK_IMPORTED_MODULE_4___default()) {
 
   static get properties() {
     return { _hass: {}, _config: {} };
@@ -15999,93 +15999,90 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const style = (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)`
-  .IroSlider {
-    display: none !important;
-  }
+#tfl-status {
+  padding:16px;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
 
-  .light-entity-card {
-    padding: 16px;
-  }
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  padding:5px;
+  margin: 1px;
+  justify-content: center;
+  align-items: left;
+}
+.line {
+  height: 30px;
+  font-weight: bold;
+}
+.status {
+  height: 30px;
+}
 
-  .light-entity-child-card {
-    box-shadow: none !important;
-    padding: 0 !important;
-  }
+.warning {
+background:rgb(233, 208, 128);
+color: black;
+}
 
-  .light-entity-card.group {
-    padding-bottom: 5;
-    padding-top: 0;
-  }
 
-  .ha-slider-full-width ha-slider {
-    width: 100%;
-  }
-
-  .percent-slider {
-    color: var(--primary-text-color);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .light-entity-card__header {
-    display: flex;
-    justify-content: space-between;
-    @apply --paper-font-headline;
-    line-height: 40px;
-    color: var(--primary-text-color);
-  }
-
-  .group .light-entity-card__header {
-  }
-
-  .light-entity-card-sliders > div {
-    margin-top: 10px;
-  }
-
-  .group .light-entity-card-sliders > div {
-    margin-top: 0px;
-  }
-
-  .light-entity-card__toggle {
-    display: flex;
-    cursor: pointer;
-  }
-
-  .light-entity-card__color-picker {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 10px;
-  }
-  
-  .light-entity-card-color_temp {
-    background-image: var(--ha-slider-background);
-  }
-
-  .light-entity-card-effectlist {
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
-
-  .group .light-entity-card-effectlist {
-    padding-bottom: 20px;
-  }
-
-  .light-entity-card-center {
-    display: flex;
-    justify-content: center;
-    cursor: pointer;
-  }
-
-  .hidden {
-    display: none;
-  }
-
-  .icon-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.bakerloo {
+background: #ae6118;
+color: white;
+}
+.central {
+background: #e41f1f;
+color: white;
+}
+.circle {
+background: #f8d42d;
+color: #113b92;
+}
+.district {
+background: #00a575;
+color: white;
+}
+.dlr {
+background: #00bbb4;
+color: white;
+}
+.elizabeth-line {
+background: #6950a1;
+color: white;
+}
+.hammersmith-city {
+background: #e899a8;
+color: #113b92;
+}
+.jubilee {
+background: #8f989e;
+color: white;
+}
+.metropolitan {
+background: #893267;
+color: white;
+}
+.northern {
+background: black;
+color: white;
+}
+.piccadilly {
+background: #0450a1;
+color: white;
+}
+.victoria {
+background: #009fe0;
+color: white;
+}
+.waterloo-city {
+background: #70c3ce;
+color: #113b92;
+}
 `;
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (style);
@@ -20959,28 +20956,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const colours = {
-  Bakerloo: { bg: '#ae6118', colour: 'white' },
-  Central: { bg: '#e41f1f', colour: 'white' },
-  Circle: { bg: '#f8d42d', colour: '#113b92' },
-  District: { bg: '#00a575', colour: 'white' },
-  DLR: { bg: '#00bbb4', colour: 'white' },
-  "Elizabeth line": { bg: '#6950a1', colour: 'white' },
-  "Hammersmith & City": { bg: '#e899a8', colour: '#113b92' },
-  Jubilee: { bg: '#8f989e', colour: 'white' },
-  Metropolitan: { bg: '#893267', colour: 'white' },
-  Northern: { bg: 'black', colour: 'white' },
-  Piccadilly: { bg: '#0450a1', colour: 'white' },
-  Victoria: { bg: '#009fe0', colour: 'white' },
-  "Waterloo & City": { bg: '#70c3ce', colour: '#113b92' }
+
 };
 
 const default_colour = { bg: 'white', colour: 'black' };
 
-const cardName = 'hello-world-card';
+const cardName = 'tfl-status-card';
 const editorName = cardName + '-editor';
 customElements.define(editorName, _index_editor_js__WEBPACK_IMPORTED_MODULE_2__["default"]);
 
-class HelloWorldCard extends lit__WEBPACK_IMPORTED_MODULE_0__.LitElement {
+class TFlStatusCard extends lit__WEBPACK_IMPORTED_MODULE_0__.LitElement {
 
   ctx;
 
@@ -20988,6 +20973,8 @@ class HelloWorldCard extends lit__WEBPACK_IMPORTED_MODULE_0__.LitElement {
     super();
     this.attachShadow({ mode: 'open' });
   }
+
+  static styles = _style_js__WEBPACK_IMPORTED_MODULE_1__["default"];
   static getConfigElement() {
     return document.createElement(editorName);
   }
@@ -21006,7 +20993,6 @@ class HelloWorldCard extends lit__WEBPACK_IMPORTED_MODULE_0__.LitElement {
 
     card.id = 'ha-card';
     content.id = 'content';
-    content.style.height = '480px';
     card.appendChild(content);
     card.appendChild(style);
     root.appendChild(card);
@@ -21022,7 +21008,7 @@ class HelloWorldCard extends lit__WEBPACK_IMPORTED_MODULE_0__.LitElement {
 
     // done once
     if (!this.ctx) {
-      const table = document.createElement('table')
+      const table = document.createElement('div')
       table.id = 'tfl-status';
       content.appendChild(table);
       this.ctx = table;
@@ -21043,30 +21029,33 @@ class HelloWorldCard extends lit__WEBPACK_IMPORTED_MODULE_0__.LitElement {
         statecolour = 'brown';
       }
 
+      const className = hassentity.attributes.friendly_name.toLowerCase().replaceAll(" &", "").replaceAll(" ", "-");
+      const warning = hassentity.state === "Good Service" ? "" : "warning";
+
       return `
-        <tr>
-            <td style="background:${background}; color:${colour}; font-weight: bold; padding:10px;">
-              <div class="info  pointer text-content "  title="${entity.name ?? hassentity.attributes.friendly_name}">
+        <div class="row">
+            <div class="column line ${className}">
+              <div class=""  title="${entity.name ?? hassentity.attributes.friendly_name}">
                 ${entity.name ?? hassentity.attributes.friendly_name}
               </div>
-            </td>
-            <td style="background:${statecolour}; padding:10px;">
-              <div class="value  pointer text-content " title="${hassentity.state}">
+            </div>
+            <div class="column status ${warning}">
+              <div class="" title="${hassentity.state}">
                 ${hassentity.state}
               </div>
-            </td>
-        </tr>
+            </div>
+        </div>
       `;
     }).join('');
   }
 }
 
-customElements.define(cardName, HelloWorldCard);
+customElements.define(cardName, TFlStatusCard);
 window.customCards = window.customCards || [];
 window.customCards.push({
   type: cardName,
-  name: 'Hello World Card',
-  description: 'My First Card',
+  name: 'TFL Status World Card',
+  description: 'Card showing the status of the London Underground lines',
 });
 })();
 

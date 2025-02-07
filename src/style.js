@@ -3,93 +3,90 @@
 import { css } from 'lit';
 
 const style = css`
-  .IroSlider {
-    display: none !important;
-  }
+#tfl-status {
+  padding:16px;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
 
-  .light-entity-card {
-    padding: 16px;
-  }
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  padding:5px;
+  margin: 1px;
+  justify-content: center;
+  align-items: left;
+}
+.line {
+  height: 30px;
+  font-weight: bold;
+}
+.status {
+  height: 30px;
+}
 
-  .light-entity-child-card {
-    box-shadow: none !important;
-    padding: 0 !important;
-  }
+.warning {
+background:rgb(233, 208, 128);
+color: black;
+}
 
-  .light-entity-card.group {
-    padding-bottom: 5;
-    padding-top: 0;
-  }
 
-  .ha-slider-full-width ha-slider {
-    width: 100%;
-  }
-
-  .percent-slider {
-    color: var(--primary-text-color);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .light-entity-card__header {
-    display: flex;
-    justify-content: space-between;
-    @apply --paper-font-headline;
-    line-height: 40px;
-    color: var(--primary-text-color);
-  }
-
-  .group .light-entity-card__header {
-  }
-
-  .light-entity-card-sliders > div {
-    margin-top: 10px;
-  }
-
-  .group .light-entity-card-sliders > div {
-    margin-top: 0px;
-  }
-
-  .light-entity-card__toggle {
-    display: flex;
-    cursor: pointer;
-  }
-
-  .light-entity-card__color-picker {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 10px;
-  }
-  
-  .light-entity-card-color_temp {
-    background-image: var(--ha-slider-background);
-  }
-
-  .light-entity-card-effectlist {
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
-
-  .group .light-entity-card-effectlist {
-    padding-bottom: 20px;
-  }
-
-  .light-entity-card-center {
-    display: flex;
-    justify-content: center;
-    cursor: pointer;
-  }
-
-  .hidden {
-    display: none;
-  }
-
-  .icon-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.bakerloo {
+background: #ae6118;
+color: white;
+}
+.central {
+background: #e41f1f;
+color: white;
+}
+.circle {
+background: #f8d42d;
+color: #113b92;
+}
+.district {
+background: #00a575;
+color: white;
+}
+.dlr {
+background: #00bbb4;
+color: white;
+}
+.elizabeth-line {
+background: #6950a1;
+color: white;
+}
+.hammersmith-city {
+background: #e899a8;
+color: #113b92;
+}
+.jubilee {
+background: #8f989e;
+color: white;
+}
+.metropolitan {
+background: #893267;
+color: white;
+}
+.northern {
+background: black;
+color: white;
+}
+.piccadilly {
+background: #0450a1;
+color: white;
+}
+.victoria {
+background: #009fe0;
+color: white;
+}
+.waterloo-city {
+background: #70c3ce;
+color: #113b92;
+}
 `;
 
 export default style;

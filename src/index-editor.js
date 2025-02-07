@@ -11,7 +11,7 @@ import ImprovedEditorForm from './entity-row-form.ts';
 
 const defaultConfig = {}
 
-export default class HelloWorldCardEditor extends ImprovedEditorForm {
+export default class TflStatusCardEditor extends ImprovedEditorForm {
 
   static get properties() {
     return { _hass: {}, _config: {} };

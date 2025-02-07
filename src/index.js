@@ -6,31 +6,19 @@ import {
 
 import style from './style.js';
 
-import HelloWorldCardEditor from './index-editor.js';
+import TflStatusCardEditor from './index-editor.js';
 
 const colours = {
-  Bakerloo: { bg: '#ae6118', colour: 'white' },
-  Central: { bg: '#e41f1f', colour: 'white' },
-  Circle: { bg: '#f8d42d', colour: '#113b92' },
-  District: { bg: '#00a575', colour: 'white' },
-  DLR: { bg: '#00bbb4', colour: 'white' },
-  "Elizabeth line": { bg: '#6950a1', colour: 'white' },
-  "Hammersmith & City": { bg: '#e899a8', colour: '#113b92' },
-  Jubilee: { bg: '#8f989e', colour: 'white' },
-  Metropolitan: { bg: '#893267', colour: 'white' },
-  Northern: { bg: 'black', colour: 'white' },
-  Piccadilly: { bg: '#0450a1', colour: 'white' },
-  Victoria: { bg: '#009fe0', colour: 'white' },
-  "Waterloo & City": { bg: '#70c3ce', colour: '#113b92' }
+
 };
 
 const default_colour = { bg: 'white', colour: 'black' };
 
-const cardName = 'hello-world-card';
+const cardName = 'tfl-status-card';
 const editorName = cardName + '-editor';
-customElements.define(editorName, HelloWorldCardEditor);
+customElements.define(editorName, TflStatusCardEditor);
 
-class HelloWorldCard extends LitElement {
+class TFlStatusCard extends LitElement {
 
   ctx;
 
@@ -38,6 +26,8 @@ class HelloWorldCard extends LitElement {
     super();
     this.attachShadow({ mode: 'open' });
   }
+
+  static styles = style;
   static getConfigElement() {
     return document.createElement(editorName);
   }
@@ -56,7 +46,6 @@ class HelloWorldCard extends LitElement {
 
     card.id = 'ha-card';
     content.id = 'content';
-    content.style.height = '480px';
     card.appendChild(content);
     card.appendChild(style);
     root.appendChild(card);
@@ -72,7 +61,7 @@ class HelloWorldCard extends LitElement {
 
     // done once
     if (!this.ctx) {
-      const table = document.createElement('table')
+      const table = document.createElement('div')
       table.id = 'tfl-status';
       content.appendChild(table);
       this.ctx = table;
@@ -93,28 +82,31 @@ class HelloWorldCard extends LitElement {
         statecolour = 'brown';
       }
 
+      const className = hassentity.attributes.friendly_name.toLowerCase().replaceAll(" &", "").replaceAll(" ", "-");
+      const warning = hassentity.state === "Good Service" ? "" : "warning";
+
       return `
-        <tr>
-            <td style="background:${background}; color:${colour}; font-weight: bold; padding:10px;">
-              <div class="info  pointer text-content "  title="${entity.name ?? hassentity.attributes.friendly_name}">
+        <div class="row">
+            <div class="column line ${className}">
+              <div class=""  title="${entity.name ?? hassentity.attributes.friendly_name}">
                 ${entity.name ?? hassentity.attributes.friendly_name}
               </div>
-            </td>
-            <td style="background:${statecolour}; padding:10px;">
-              <div class="value  pointer text-content " title="${hassentity.state}">
+            </div>
+            <div class="column status ${warning}">
+              <div class="" title="${hassentity.state}">
                 ${hassentity.state}
               </div>
-            </td>
-        </tr>
+            </div>
+        </div>
       `;
     }).join('');
   }
 }
 
-customElements.define(cardName, HelloWorldCard);
+customElements.define(cardName, TFlStatusCard);
 window.customCards = window.customCards || [];
 window.customCards.push({
   type: cardName,
-  name: 'Hello World Card',
-  description: 'My First Card',
+  name: 'TFL Status World Card',
+  description: 'Card showing the status of the London Underground lines',
 });

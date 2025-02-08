@@ -55,9 +55,9 @@ export class EntitiesCardRowEditor extends LitElement {
       <ha-sortable handle-selector=".handle" @item-moved=${this._rowMoved}>
         <div class="entities">
           ${repeat(
-        this.entities,
-        (entityConf) => this._getKey(entityConf),
-        (entityConf, index) => html`
+        this.entities.map(entity => (typeof entity === 'string' || entity instanceof String) ? { entity } : entity),
+        (entityConf: LovelaceRowConfig) => this._getKey(entityConf),
+        (entityConf: LovelaceRowConfig, index) => html`
               <div class="entity">
                 <div class="handle">
                   <ha-svg-icon .path=${mdiDrag}></ha-svg-icon>

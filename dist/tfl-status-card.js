@@ -15448,7 +15448,7 @@ let EntitiesCardRowEditor = class EntitiesCardRowEditor extends lit_1.LitElement
       </h3>
       <ha-sortable handle-selector=".handle" @item-moved=${this._rowMoved}>
         <div class="entities">
-          ${(0, repeat_js_1.repeat)(this.entities, (entityConf) => this._getKey(entityConf), (entityConf, index) => (0, lit_1.html) `
+          ${(0, repeat_js_1.repeat)(this.entities.map(entity => (typeof entity === 'string' || entity instanceof String) ? { entity } : entity), (entityConf) => this._getKey(entityConf), (entityConf, index) => (0, lit_1.html) `
               <div class="entity">
                 <div class="handle">
                   <ha-svg-icon .path=${js_1.mdiDrag}></ha-svg-icon>
@@ -15928,7 +15928,6 @@ class TflStatusCardEditor extends (_entity_row_form_ts__WEBPACK_IMPORTED_MODULE_
     //   `;
 
     return this.renderForm([
-      { controls: [{ label: "Title", configValue: "title", type: _marcokreeft_ha_editor_formbuilder_dist_interfaces__WEBPACK_IMPORTED_MODULE_1__.FormControlType.Textbox }] },
       {
         controls: [{
           label: "Entities",

@@ -40,7 +40,6 @@ export default class TflStatusCardEditor extends ImprovedEditorForm {
     //   `;
 
     return this.renderForm([
-      { controls: [{ label: "Title", configValue: "title", type: FormControlType.Textbox }] },
       {
         controls: [{
           label: "Entities",

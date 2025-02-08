@@ -20951,8 +20951,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const default_colour = { bg: 'white', colour: 'black' };
-
 const cardName = 'tfl-status-card';
 const editorName = cardName + '-editor';
 customElements.define(editorName, _index_editor_js__WEBPACK_IMPORTED_MODULE_2__["default"]);
@@ -20979,8 +20977,6 @@ class TFlStatusCard extends lit__WEBPACK_IMPORTED_MODULE_0__.LitElement {
         return;
       }
       const hassentity = this.hass.states[entityIndex]
-      let background = colours[hassentity.attributes.friendly_name]?.bg || default_colour.bg;
-      let colour = colours[hassentity.attributes.friendly_name]?.colour || default_colour.colour;
 
       let statecolour = 'transparent';
       if (hassentity.state !== 'Good Service') {

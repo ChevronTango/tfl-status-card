@@ -7,8 +7,6 @@ import style from './style.js';
 
 import TflStatusCardEditor from './index-editor.js';
 
-const default_colour = { bg: 'white', colour: 'black' };
-
 const cardName = 'tfl-status-card';
 const editorName = cardName + '-editor';
 customElements.define(editorName, TflStatusCardEditor);
@@ -35,8 +33,6 @@ class TFlStatusCard extends LitElement {
         return;
       }
       const hassentity = this.hass.states[entityIndex]
-      let background = colours[hassentity.attributes.friendly_name]?.bg || default_colour.bg;
-      let colour = colours[hassentity.attributes.friendly_name]?.colour || default_colour.colour;
 
       let statecolour = 'transparent';
       if (hassentity.state !== 'Good Service') {

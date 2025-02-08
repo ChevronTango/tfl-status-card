@@ -41,9 +41,12 @@ class TFlStatusCard extends LitElement {
 
   render() {
     const config = this._config;
-
     const items = config.entities.map(entity => {
-      const hassentity = this.hass.states[entity.entity]
+      const entityIndex = entity?.entity ?? entity;
+      if (!entityIndex) {
+        return;
+      }
+      const hassentity = this.hass.states[entityIndex]
       let background = colours[hassentity.attributes.friendly_name]?.bg || default_colour.bg;
       let colour = colours[hassentity.attributes.friendly_name]?.colour || default_colour.colour;
 

@@ -3,7 +3,7 @@ A status card for [Home Assistant](https://github.com/home-assistant/home-assist
 
 The card works with entities from within the **sensor**  domain and is intended to be used with entities from the [London Underground Integration](https://www.home-assistant.io/integrations/london_underground/).
 
-![Preview](./images/sample.png)
+![Preview](images/sample.png)
 
 ## Install
 

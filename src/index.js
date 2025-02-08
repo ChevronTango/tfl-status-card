@@ -1,17 +1,11 @@
 import {
   LitElement,
   html,
-  css,
 } from "lit";
 
 import style from './style.js';
 
 import TflStatusCardEditor from './index-editor.js';
-import { fireEvent } from "custom-card-helpers";
-
-const colours = {
-
-};
 
 const default_colour = { bg: 'white', colour: 'black' };
 
@@ -20,12 +14,6 @@ const editorName = cardName + '-editor';
 customElements.define(editorName, TflStatusCardEditor);
 
 class TFlStatusCard extends LitElement {
-
-  ctx;
-
-  constructor() {
-    super();
-  }
 
   static styles = style;
   static getConfigElement() {
@@ -87,7 +75,7 @@ class TFlStatusCard extends LitElement {
   async _handleClick(entity) {
     if (entity?.attributes?.Description) {
       const helpers = await (window).loadCardHelpers?.();
-      const name = await helpers.showAlertDialog(this, {
+      await helpers.showAlertDialog(this, {
         title: entity?.attributes?.friendly_name,
         text: entity?.attributes?.Description
       });
@@ -102,6 +90,6 @@ customElements.define(cardName, TFlStatusCard);
 window.customCards = window.customCards || [];
 window.customCards.push({
   type: cardName,
-  name: 'TFL Status World Card',
+  name: 'TFL Status Card',
   description: 'Card showing the status of the London Underground lines',
 });

@@ -1,16 +1,14 @@
 import {
-  LitElement,
   html,
   css,
 } from "lit";
 
 import EditorForm from '@marcokreeft/ha-editor-formbuilder';
-import { renderEntityDropdown } from '@marcokreeft/ha-editor-formbuilder/dist/utils/controls';
-import { FormControlRow, FormControl, ValueChangedEvent, FormControlType } from '@marcokreeft/ha-editor-formbuilder/dist/interfaces';
+import { FormControlRow, FormControl, ValueChangedEvent } from '@marcokreeft/ha-editor-formbuilder/dist/interfaces';
 import { TemplateResult } from 'lit-html';
-import { HomeAssistant, EntityConfig, fireEvent, HASSDomEvent, } from "custom-card-helpers";
+import { EntityConfig, fireEvent, HASSDomEvent, } from "custom-card-helpers";
 
-import { customElement, property, state } from "lit/decorators.js";
+import { state } from "lit/decorators.js";
 import { ScopedRegistryHost } from "@lit-labs/scoped-registry-mixin";
 import { loadHaForm } from "./load-ha-form";
 

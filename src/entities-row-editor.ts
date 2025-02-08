@@ -1,4 +1,4 @@
-import { mdiClose, mdiDrag, mdiPencil } from "@mdi/js";
+import { mdiClose, mdiDrag } from "@mdi/js";
 import { LitElement, css, html, nothing } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { repeat } from "lit/directives/repeat.js";

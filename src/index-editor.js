@@ -1,11 +1,7 @@
 import {
-  LitElement,
   html,
-  css,
 } from "lit";
-import { FormControlType, FormulaOneCardType } from '@marcokreeft/ha-editor-formbuilder/dist/interfaces'
-import { getEntitiesByDomain, getEntitiesByDeviceClass, getDropdownOptionsFromEnum, formatList } from "@marcokreeft/ha-editor-formbuilder/dist/utils/entities";
-// import { EntitiesRowEditor } from './EntitiesRowEditor.ts';
+import { formatList } from "@marcokreeft/ha-editor-formbuilder/dist/utils/entities";
 import './entities-row-editor.ts';
 import ImprovedEditorForm from './entity-row-form.ts';
 

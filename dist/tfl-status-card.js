@@ -15884,22 +15884,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ TflStatusCardEditor)
 /* harmony export */ });
 /* harmony import */ var lit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lit */ "./node_modules/lit/index.js");
-/* harmony import */ var _marcokreeft_ha_editor_formbuilder_dist_interfaces__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @marcokreeft/ha-editor-formbuilder/dist/interfaces */ "./node_modules/@marcokreeft/ha-editor-formbuilder/dist/interfaces.js");
-/* harmony import */ var _marcokreeft_ha_editor_formbuilder_dist_utils_entities__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @marcokreeft/ha-editor-formbuilder/dist/utils/entities */ "./node_modules/@marcokreeft/ha-editor-formbuilder/dist/utils/entities.js");
-/* harmony import */ var _entities_row_editor_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./entities-row-editor.ts */ "./src/entities-row-editor.ts");
-/* harmony import */ var _entities_row_editor_ts__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_entities_row_editor_ts__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _entity_row_form_ts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./entity-row-form.ts */ "./src/entity-row-form.ts");
-/* harmony import */ var _entity_row_form_ts__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_entity_row_form_ts__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _marcokreeft_ha_editor_formbuilder_dist_utils_entities__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @marcokreeft/ha-editor-formbuilder/dist/utils/entities */ "./node_modules/@marcokreeft/ha-editor-formbuilder/dist/utils/entities.js");
+/* harmony import */ var _entities_row_editor_ts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./entities-row-editor.ts */ "./src/entities-row-editor.ts");
+/* harmony import */ var _entities_row_editor_ts__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_entities_row_editor_ts__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _entity_row_form_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./entity-row-form.ts */ "./src/entity-row-form.ts");
+/* harmony import */ var _entity_row_form_ts__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_entity_row_form_ts__WEBPACK_IMPORTED_MODULE_3__);
 
 
-
-// import { EntitiesRowEditor } from './EntitiesRowEditor.ts';
 
 
 
 const defaultConfig = {}
 
-class TflStatusCardEditor extends (_entity_row_form_ts__WEBPACK_IMPORTED_MODULE_4___default()) {
+class TflStatusCardEditor extends (_entity_row_form_ts__WEBPACK_IMPORTED_MODULE_3___default()) {
 
   static get properties() {
     return { _hass: {}, _config: {} };
@@ -15936,7 +15933,7 @@ class TflStatusCardEditor extends (_entity_row_form_ts__WEBPACK_IMPORTED_MODULE_
           items: Object.keys(this._hass.states)
             .filter((eid) => eid.substr(0, eid.indexOf(".")) === 'sensor' &&
               this._hass.states[eid].attributes.attribution === "Powered by TfL Open Data")
-            .map((item) => (0,_marcokreeft_ha_editor_formbuilder_dist_utils_entities__WEBPACK_IMPORTED_MODULE_2__.formatList)(item, this._hass)),
+            .map((item) => (0,_marcokreeft_ha_editor_formbuilder_dist_utils_entities__WEBPACK_IMPORTED_MODULE_1__.formatList)(item, this._hass)),
         }]
       },
     ])
@@ -20948,17 +20945,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lit */ "./node_modules/lit/index.js");
 /* harmony import */ var _style_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.js */ "./src/style.js");
 /* harmony import */ var _index_editor_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index-editor.js */ "./src/index-editor.js");
-/* harmony import */ var custom_card_helpers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! custom-card-helpers */ "./node_modules/custom-card-helpers/dist/index.m.js");
 
 
 
 
 
-
-
-const colours = {
-
-};
 
 const default_colour = { bg: 'white', colour: 'black' };
 
@@ -20967,12 +20958,6 @@ const editorName = cardName + '-editor';
 customElements.define(editorName, _index_editor_js__WEBPACK_IMPORTED_MODULE_2__["default"]);
 
 class TFlStatusCard extends lit__WEBPACK_IMPORTED_MODULE_0__.LitElement {
-
-  ctx;
-
-  constructor() {
-    super();
-  }
 
   static styles = _style_js__WEBPACK_IMPORTED_MODULE_1__["default"];
   static getConfigElement() {
@@ -21034,7 +21019,7 @@ class TFlStatusCard extends lit__WEBPACK_IMPORTED_MODULE_0__.LitElement {
   async _handleClick(entity) {
     if (entity?.attributes?.Description) {
       const helpers = await (window).loadCardHelpers?.();
-      const name = await helpers.showAlertDialog(this, {
+      await helpers.showAlertDialog(this, {
         title: entity?.attributes?.friendly_name,
         text: entity?.attributes?.Description
       });
@@ -21049,7 +21034,7 @@ customElements.define(cardName, TFlStatusCard);
 window.customCards = window.customCards || [];
 window.customCards.push({
   type: cardName,
-  name: 'TFL Status World Card',
+  name: 'TFL Status Card',
   description: 'Card showing the status of the London Underground lines',
 });
 })();

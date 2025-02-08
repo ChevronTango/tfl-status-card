@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "lint": "eslint  --fix ./src",
-    "start": "webpack --watch --config webpack/config.dev.js",
+    "watch": "webpack --watch --config webpack/config.dev.js",
     "build": "webpack --config webpack/config.prod.js"
   },
   "author": "",

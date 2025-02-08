@@ -21004,7 +21004,7 @@ class TFlStatusCard extends lit__WEBPACK_IMPORTED_MODULE_0__.LitElement {
       const warning = hassentity.state === "Good Service" ? "" : "warning";
 
       return (0,lit__WEBPACK_IMPORTED_MODULE_0__.html)`
-          <div class="row" @click=${warning ? () => this._handleClick(hassentity) : ""}>
+          <div class="row" style="cursor: pointer;" @click=${() => this._handleClick(hassentity)}>
             <div class="column line ${className}">
               <div class=""  title="${entity.name ?? hassentity.attributes.friendly_name}">
                 ${entity.name ?? hassentity.attributes.friendly_name}

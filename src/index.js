@@ -12,27 +12,45 @@ const editorName = cardName + '-editor';
 customElements.define(editorName, TflStatusCardEditor);
 
 class TFlStatusCard extends LitElement {
+  static properties = {
+    _entityStates: []
+  };
 
   static styles = style;
   static getConfigElement() {
     return document.createElement(editorName);
   }
+
+  set hass(hass) {
+    this._hass = hass;
+    this.updateProperties();
+  }
+
+
   // required
   setConfig(config) {
     if (!config.entities) {
       throw new Error('You need to define at least one entity');
     }
     this._config = config;
+    this.updateProperties();
+  }
+
+  updateProperties() {
+    if (!this._config || !this._hass) {
+      return;
+    }
+    this._entityStates = this._config.entities.map(entity => {
+      const entityIndex = entity?.entity ?? entity;
+      const state = this._hass.states[entityIndex]
+      const name = entity?.name;
+      return { id: entityIndex, name: name, state: state };
+    });
   }
 
   render() {
-    const config = this._config;
-    const items = config.entities.map(entity => {
-      const entityIndex = entity?.entity ?? entity;
-      if (!entityIndex) {
-        return;
-      }
-      const hassentity = this.hass.states[entityIndex]
+    const items = this._entityStates.map(entity => {
+      const hassentity = entity.state;
 
       let statecolour = 'transparent';
       if (hassentity.state !== 'Good Service') {

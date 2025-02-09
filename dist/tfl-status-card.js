@@ -15905,6 +15905,9 @@ __webpack_require__.r(__webpack_exports__);
 const defaultConfig = {}
 
 class TflStatusCardEditor extends (_entity_row_form_ts__WEBPACK_IMPORTED_MODULE_3___default()) {
+  static properties = {
+    _configEntities: [],
+  };
 
   static get properties() {
     return { _hass: {}, _config: {} };
@@ -20964,27 +20967,45 @@ const editorName = cardName + '-editor';
 customElements.define(editorName, _index_editor_js__WEBPACK_IMPORTED_MODULE_2__["default"]);
 
 class TFlStatusCard extends lit__WEBPACK_IMPORTED_MODULE_0__.LitElement {
+  static properties = {
+    _entityStates: []
+  };
 
   static styles = _style_js__WEBPACK_IMPORTED_MODULE_1__["default"];
   static getConfigElement() {
     return document.createElement(editorName);
   }
+
+  set hass(hass) {
+    this._hass = hass;
+    this.updateProperties();
+  }
+
+
   // required
   setConfig(config) {
     if (!config.entities) {
       throw new Error('You need to define at least one entity');
     }
     this._config = config;
+    this.updateProperties();
+  }
+
+  updateProperties() {
+    if (!this._config || !this._hass) {
+      return;
+    }
+    this._entityStates = this._config.entities.map(entity => {
+      const entityIndex = entity?.entity ?? entity;
+      const state = this._hass.states[entityIndex]
+      const name = entity?.name;
+      return { id: entityIndex, name: name, state: state };
+    });
   }
 
   render() {
-    const config = this._config;
-    const items = config.entities.map(entity => {
-      const entityIndex = entity?.entity ?? entity;
-      if (!entityIndex) {
-        return;
-      }
-      const hassentity = this.hass.states[entityIndex]
+    const items = this._entityStates.map(entity => {
+      const hassentity = entity.state;
 
       let statecolour = 'transparent';
       if (hassentity.state !== 'Good Service') {

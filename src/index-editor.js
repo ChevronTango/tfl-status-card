@@ -8,6 +8,9 @@ import ImprovedEditorForm from './entity-row-form.ts';
 const defaultConfig = {}
 
 export default class TflStatusCardEditor extends ImprovedEditorForm {
+  static properties = {
+    _configEntities: [],
+  };
 
   static get properties() {
     return { _hass: {}, _config: {} };

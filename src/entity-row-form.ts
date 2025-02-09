@@ -223,12 +223,14 @@ export default class ImprovedEditorForm extends ScopedRegistryHost(EditorForm) {
 
   // Render the editor control. Should go in the utils/controls.js
   renderEntities(card: ImprovedEditorForm, control: FormControl) {
+    const items = control?.items?.map(entity => (typeof entity === 'string' || entity instanceof String) ? entity : entity.value);
     return html`<div class="form-control">
       <entities-card-row-editor
         label="${control.label}"
         .hass=${card._hass}
         .entities="${card._config[control.configValue!] ?? []}"
         .configValue="${control.configValue}"
+        .items="${items}"
         @entities-changed=${card._valueChanged}
         @edit-detail-element=${card._editDetailElement}
       ></entities-card-row-editor>

@@ -28,6 +28,9 @@ export class EntitiesCardRowEditor extends LitElement {
   @property()
   public label?: string;
 
+  @property()
+  public items?: string[];
+
   private _entityKeys = new WeakMap<LovelaceRowConfig, string>();
 
   private _getKey(action: LovelaceRowConfig) {
@@ -42,6 +45,7 @@ export class EntitiesCardRowEditor extends LitElement {
     if (!this.entities || !this.hass) {
       return nothing;
     }
+    console.log(this.items);
 
     return html`
       <h3>
@@ -85,6 +89,7 @@ export class EntitiesCardRowEditor extends LitElement {
                         .hass=${this.hass}
                         .value=${(entityConf as EntityConfig).entity}
                         .index=${index}
+                        .includeEntities=${this.items}
                         @value-changed=${this._valueChanged}
                       ></ha-entity-picker>
                     `}
@@ -120,6 +125,7 @@ export class EntitiesCardRowEditor extends LitElement {
       <ha-entity-picker
         class="add-entity"
         .hass=${this.hass}
+        .includeEntities=${this.items}
         @value-changed=${this._addEntity}
       ></ha-entity-picker>
     `;

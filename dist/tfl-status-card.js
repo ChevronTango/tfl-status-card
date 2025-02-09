@@ -15441,6 +15441,7 @@ let EntitiesCardRowEditor = class EntitiesCardRowEditor extends lit_1.LitElement
         if (!this.entities || !this.hass) {
             return lit_1.nothing;
         }
+        console.log(this.items);
         return (0, lit_1.html) `
       <h3>
         ${this.label ||
@@ -15472,6 +15473,7 @@ let EntitiesCardRowEditor = class EntitiesCardRowEditor extends lit_1.LitElement
                         .hass=${this.hass}
                         .value=${entityConf.entity}
                         .index=${index}
+                        .includeEntities=${this.items}
                         @value-changed=${this._valueChanged}
                       ></ha-entity-picker>
                     `}
@@ -15504,6 +15506,7 @@ let EntitiesCardRowEditor = class EntitiesCardRowEditor extends lit_1.LitElement
       <ha-entity-picker
         class="add-entity"
         .hass=${this.hass}
+        .includeEntities=${this.items}
         @value-changed=${this._addEntity}
       ></ha-entity-picker>
     `;
@@ -15626,6 +15629,9 @@ __decorate([
 __decorate([
     (0, decorators_js_1.property)()
 ], EntitiesCardRowEditor.prototype, "label", void 0);
+__decorate([
+    (0, decorators_js_1.property)()
+], EntitiesCardRowEditor.prototype, "items", void 0);
 exports.EntitiesCardRowEditor = EntitiesCardRowEditor = __decorate([
     (0, decorators_js_1.customElement)("entities-card-row-editor")
 ], EntitiesCardRowEditor);
@@ -15849,13 +15855,15 @@ class ImprovedEditorForm extends (0, scoped_registry_mixin_1.ScopedRegistryHost)
     }
     // Render the editor control. Should go in the utils/controls.js
     renderEntities(card, control) {
-        var _a;
+        var _a, _b;
+        const items = (_a = control === null || control === void 0 ? void 0 : control.items) === null || _a === void 0 ? void 0 : _a.map(entity => (typeof entity === 'string' || entity instanceof String) ? entity : entity.value);
         return (0, lit_1.html) `<div class="form-control">
       <entities-card-row-editor
         label="${control.label}"
         .hass=${card._hass}
-        .entities="${(_a = card._config[control.configValue]) !== null && _a !== void 0 ? _a : []}"
+        .entities="${(_b = card._config[control.configValue]) !== null && _b !== void 0 ? _b : []}"
         .configValue="${control.configValue}"
+        .items="${items}"
         @entities-changed=${card._valueChanged}
         @edit-detail-element=${card._editDetailElement}
       ></entities-card-row-editor>

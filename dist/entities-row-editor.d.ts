@@ -13,6 +13,7 @@ export declare class EntitiesCardRowEditor extends LitElement {
     hass?: HomeAssistant;
     entities?: LovelaceRowConfig[];
     label?: string;
+    items?: string[];
     private _entityKeys;
     private _getKey;
     render(): typeof nothing | import("lit").TemplateResult<1>;

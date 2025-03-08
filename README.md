@@ -9,8 +9,14 @@ The card works with entities from within the **sensor**  domain and is intended 
 
 ### HACS (recommended) 
 
-This card is available in [HACS](https://hacs.xyz/) (Home Assistant Community Store).
+This card is not yet available in [HACS](https://hacs.xyz/) (Home Assistant Community Store) directly but can still be added manually.
 <small>*HACS is a third party community store and is not included in Home Assistant out of the box.*</small>
+
+1. Open HACS and navigate to Custom Repositories.
+
+2. Select `Dashboard` as the Type and enter `https://github.com/ChevronTango/tfl-status-card` as the repository. Save and refresh.
+
+3. Find `TFL Status Card` in the HACS store and select install.
 
 ### Manual install
 

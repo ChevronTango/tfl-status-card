@@ -14,7 +14,7 @@ This card is available in [HACS](https://hacs.xyz/) (Home Assistant Community St
 
 ### Manual install
 
-1. Download and copy `tfl-status-card.js` from the [latest release](https://github.com/ChevronTango/ha-tfl-status-card/releases/latest) into your `config/www` directory.
+1. Download and copy `tfl-status-card.js` from the [latest release](https://github.com/ChevronTango/tfl-status-card/releases/latest) into your `config/www` directory.
 
 2. Add the resource reference as decribed below.
 

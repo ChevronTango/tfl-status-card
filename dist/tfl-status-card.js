@@ -16090,6 +16090,30 @@ color: white;
 background: #70c3ce;
 color: #113b92;
 }
+.liberty {
+background: #61686b;
+color: white;
+}
+.lioness {
+background: #ffa600;;
+color: #113b92;
+}
+.mildmay {
+background: #006fe6;
+color: white;
+}
+.suffragette {
+background: #18a95d;
+color: #113b92;
+}
+.weaver {
+background: #9b0058;
+color: white;
+}
+.windrush {
+background: #dc241f;
+color: white;
+}
 `;
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (style);
